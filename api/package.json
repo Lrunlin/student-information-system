@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --watch ./src ./src/index.js",
+    "cl": "nodemon ./class.js"
+  },
+  "_moduleAliases": {
+    "@": "./src"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.7",
+    "express": "~4.16.1",
+    "express-fileupload": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
+    "module-alias": "^2.2.2",
+    "moment": "^2.29.1",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.2",
+    "nodemon": "^2.0.15",
+    "pinyin": "^2.10.2",
+    "sharp": "^0.29.3"
+  }
+}
