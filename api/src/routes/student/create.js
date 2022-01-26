@@ -9,22 +9,26 @@ const pinyin = require('pinyin');
 const admin = require('@/utils/admin');
 
 
-router.post('/teacher', admin,async (req, res) => {
+router.post('/student', admin, async (req, res) => {
     let {
         name,
         sex,
         time,
-        _class
+        college,
+        major,
+        _class,
+        id_number,
+        address,
     } = req.body;
-    let [countName] = await db.query(`select count(id) from teacher where name='${name}'`);
+    let [countName] = await db.query(`select count(id) from student where name='${name}'`);
     let count = (countName[0]['count(id)'] + 1) < 10 ? `0${countName[0]['count(id)']+1}` : countName[0]['count(id)'] + 1
-    let id = `teacher_${pinyin(name, {
+    let id = `${pinyin(name, {
                  style: pinyin.STYLE_NORMAL,
-             }).join('')}${count}`
-    let tea_class = _class ? `'${_class}'` : null
-    let sql = `INSERT INTO teacher ( id, password,name,sex,class,time)
+             }).join('')}${count}`;
+    let _time = moment(new Date(time)).format('YYYY-MM-DD');
+    let sql = `INSERT INTO student ( id, password,name,sex,college,major,class,time,id_number,address)
                        VALUES
-             ('${id}', '${id}', '${name}', '${sex}',${tea_class},'${moment(new Date(time)).format('YYYY-MM-DD')}');`
+             ('${id}', '${id}', '${name}', '${sex}','${college}','${major}','${_class}','${_time}','${id_number}','${address}');`
 
     try {
         let [row] = await db.query(sql);
@@ -48,7 +52,6 @@ router.post('/teacher', admin,async (req, res) => {
             message: '创建成功'
         })
     } catch (error) {
-        console.log(error);
         res.json({
             success: false,
             message: '创建失败'

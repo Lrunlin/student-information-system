@@ -8,11 +8,19 @@
   >
     <el-sub-menu index="1">
       <template #title>
-        <el-icon><location /></el-icon>
+        <el-icon><avatar /></el-icon>
         <span>教师管理</span>
       </template>
       <el-menu-item index="/teacher">教师列表</el-menu-item>
       <el-menu-item index="/create-teacher">添加教师</el-menu-item>
+    </el-sub-menu>
+    <el-sub-menu index="2">
+      <template #title>
+        <el-icon><UserFilled /></el-icon>
+        <span>学生管理</span>
+      </template>
+      <el-menu-item index="/student">学生列表</el-menu-item>
+      <el-menu-item index="/create-student">添加学生</el-menu-item>
     </el-sub-menu>
     <el-menu-item index="/email">
       <el-icon><Message /></el-icon>
@@ -26,6 +34,6 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { Location, Message, Edit } from "@element-plus/icons-vue";
+import { UserFilled, Message, Edit,Avatar } from "@element-plus/icons-vue";
 </script>
 <style scoped lang="scss"></style>

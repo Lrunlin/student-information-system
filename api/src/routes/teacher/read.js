@@ -1,8 +1,9 @@
 const express = require('express');
 const db = require('@/db');
 const router = express.Router();
+const admin = require('@/utils/admin');
 
-router.get('/teacher/:key/:value', async (req, res) => {
+router.get('/teacher/:key/:value',admin, async (req, res) => {
     let {
         key,
         value

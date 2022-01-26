@@ -25,6 +25,15 @@ const routes = [{
   }, {
     path: '/admin',
     component: () => import('@/page/admin/updata-password.vue')
+  }, {
+    path: '/student',
+    component: () => import('@/page/admin/read-student.vue')
+  }, {
+    path: '/create-student',
+    component: () => import('@/page/admin/create-student.vue')
+  }, {
+    path: '/student/:id',
+    component: () => import('@/page/admin/update-student.vue')
   }]
 }, {
   path: '/sign',

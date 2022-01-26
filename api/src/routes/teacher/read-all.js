@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const db = require('@/db');
+const admin = require('@/utils/admin');
 
-router.get('/teacher', async (req, res) => {
+router.get('/teacher',admin, async (req, res) => {
     let sql = `select * from teacher;`
     let [rows] = await db.query(sql);
     res.json({

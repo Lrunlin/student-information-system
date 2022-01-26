@@ -1,5 +1,5 @@
 <template>
-  <el-select multiple v-model="value" placeholder="选择班级" @change="change">
+  <el-select :multiple="!props.radio" v-model="value" placeholder="选择班级" @change="change">
     <el-option v-for="item in options" :key="item" :label="item" :value="item"> </el-option>
   </el-select>
 </template>
@@ -12,7 +12,7 @@ axios.get("/class").then(res => {
   options.value = res.data.data;
 });
 
-let props = defineProps(["value"]);
+let props = defineProps(["value","radio"]);
 let emit = defineEmits();
 let stop = watchEffect(() => {
   if (props.value) {

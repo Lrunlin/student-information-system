@@ -2,13 +2,13 @@
   <header>
     <el-select v-model="key" placeholder="Select">
       <el-option label="根据姓名查询" value="name" />
-      <el-option label="根据班级查询(仅能查询带一个班的)" value="class" />
+      <el-option label="根据班级查询" value="class" />
       <el-option label="根据ID查询" value="id" />
       <el-option label="根据性别查询性别" value="sex" />
     </el-select>
-    <el-input v-model="value" v-show="key == 'name'" placeholder="请输入教师姓名" />
+    <el-input v-model="value" v-show="key == 'name'" placeholder="请输入学生姓名" />
     <ClassSelect v-show="key == 'class'" v-model:value="value" :radio="true" />
-    <el-input v-model="value" v-show="key == 'id'" placeholder="请输入教师ID" />
+    <el-input v-model="value" v-show="key == 'id'" placeholder="请输入学生ID" />
     <el-radio-group v-show="key == 'sex'" v-model="value">
       <el-radio label="男"></el-radio>
       <el-radio label="女"></el-radio>
@@ -35,14 +35,17 @@
         <el-tag type="danger" v-else>女</el-tag>
       </template>
     </el-table-column>
-    <el-table-column label="代管班级">
+    <el-table-column label="所属班级">
       <template v-slot="scope">
-        <div v-if="scope.row.class">
-          <div v-for="(item, index) in scope.row.class" :key="item">
-            <el-tag style="margin-top: 5px">{{ item }}</el-tag>
-          </div>
+        <div>
+          <el-tag style="margin-top: 2px">{{ scope.row.college }}</el-tag>
         </div>
-        <el-tag type="danger" v-else>暂无</el-tag>
+        <div>
+          <el-tag style="margin-top: 2px">{{ scope.row.major }}</el-tag>
+        </div>
+        <div>
+          <el-tag style="margin-top: 2px">{{ scope.row.class }}</el-tag>
+        </div>
       </template>
     </el-table-column>
     <el-table-column label="编辑">
@@ -69,7 +72,8 @@ watch(key, () => {
 });
 
 function all() {
-  axios.get(`/teacher`).then(res => {
+  axios.get(`/student`).then(res => {
+    console.log(res.data);
     tableData.value = res.data.data;
   });
 }
@@ -80,14 +84,14 @@ onMounted(() => {
 //修改条件或者值时重新搜索
 watchEffect(() => {
   if (!value.value) return false;
-  axios.get(`/teacher/${key.value}/${value.value}`).then(res => {
+  axios.get(`/student/${key.value}/${value.value}`).then(res => {
     tableData.value = res.data.data;
   });
 });
 
 let router = useRouter();
 function link(id) {
-  router.push(`/teacher/${id}`);
+  router.push(`/student/${id}`);
 }
 </script>
 <style scoped lang="scss">

@@ -8,9 +8,9 @@ import { ref, onUnmounted, computed } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import Admin from "@/components/AdminNav.vue";
-import Teacher from "@/components/TeacherNav.vue";
-import Student from "@/components/StudentNav.vue";
+import Admin from "@/components/nav/AdminNav.vue";
+import Teacher from "@/components/nav/TeacherNav.vue";
+import Student from "@/components/nav/StudentNav.vue";
 import { ElMessage } from "element-plus";
 
 let store = useStore();

@@ -16,7 +16,7 @@
       </label>
     </el-form-item>
     <el-form-item label="姓名">
-      <el-input v-model="form.name" placeholder="指导教师姓名"></el-input>
+      <el-input v-model="form.name" placeholder="指导学生姓名"></el-input>
     </el-form-item>
     <el-form-item label="性别">
       <el-radio-group v-model="form.sex">
@@ -27,26 +27,30 @@
     <el-form-item label="入职时间">
       <el-date-picker v-model="form.time" type="date" placeholder="填写入职时间" />
     </el-form-item>
-    <el-form-item label="管理班级">
-      <ClassSelect v-model:value="form.class" />
+    <el-form-item label="所在班级">
+      <LinkageSelect
+        v-model:college="form.college"
+        v-model:major="form.major"
+        v-model:class="form.class"
+      />
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="update">修改</el-button>
       <el-button style="margin-left: 20px" type="danger" @click="dialogVisible = true"
-        >删除教师</el-button
+        >删除学生</el-button
       >
     </el-form-item>
   </el-form>
 
-  <el-dialog v-model="dialogVisible" title="警告:删除教师后无法恢复信息" width="30%">
+  <el-dialog v-model="dialogVisible" title="警告:删除学生后无法恢复信息" width="30%">
     <span
-      >确定删除教师<b>{{ form.name }}</b
-      >,账号:<span style="color:red;">{{ id }}</span></span
+      >确定删除学生<b>{{ form.name }}</b
+      >,账号:<span style="color: red">{{ id }}</span></span
     >
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">关闭</el-button>
-        <el-button style="margin-left: 20px" type="danger" @click="remove">删除教师</el-button>
+        <el-button style="margin-left: 20px" type="danger" @click="remove">删除学生</el-button>
       </span>
     </template>
   </el-dialog>
@@ -56,7 +60,7 @@
 import { ref, reactive } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import axios from "axios";
-import ClassSelect from "@/components/select/ClassSelect.vue";
+import LinkageSelect from "@/components/select/LinkageSelect.vue";
 import { ElMessage } from "element-plus";
 import { useRoute, useRouter } from "vue-router";
 let route = useRoute();
@@ -70,20 +74,22 @@ let form = reactive({
   name: "",
   time: "",
   sex: "",
+
+  college: "",
+  major: "",
   class: "",
+
+  id_number: "",
+  address: "",
 });
-axios.get(`/teacher/id/${id}`).then(res => {
+axios.get(`/student/id/${id}`).then(res => {
   if (!res.data.success) {
-    ElMessage.error("未找到对应的教师");
+    ElMessage.error("未找到对应的学生");
     return false;
   }
   let _data = res.data.data[0];
-  form = Object.assign(form, {
-    name: _data.name,
-    time: _data.time,
-    sex: _data.sex,
-    class: _data.class,
-  });
+  delete _data.password;
+  form = Object.assign(form, _data);
 });
 function changeImage() {
   let url = window.URL.createObjectURL(document.getElementById("image").files[0]);
@@ -99,7 +105,7 @@ function update() {
     formData.append("image", document.getElementById("image").files[0]);
   }
   if (!form.name) {
-    ElMessage.warning("请填写教师姓名");
+    ElMessage.warning("请填写学生姓名");
     return false;
   }
   axios.put(`/teacher/${id}`, formData).then(res => {
@@ -125,8 +131,10 @@ function remove() {
 </script>
 <style scoped lang="scss">
 .el-form {
-  width: 600px;
   margin-top: 30px;
+  .el-input{
+      width: 500px;
+  }
 }
 .avatar-uploader {
   border: 1px dashed #d9d9d9;
