@@ -24,6 +24,12 @@
         <el-radio label="女"></el-radio>
       </el-radio-group>
     </el-form-item>
+    <el-form-item label="身份证号">
+      <el-input v-model="form.id_number" placeholder="学生身份证号"></el-input>
+    </el-form-item>
+    <el-form-item label="家庭住址">
+      <el-input v-model="form.address" placeholder="学生家庭住址"></el-input>
+    </el-form-item>
     <el-form-item label="入职时间">
       <el-date-picker v-model="form.time" type="date" placeholder="填写入职时间" />
     </el-form-item>
@@ -43,10 +49,11 @@
   </el-form>
 
   <el-dialog v-model="dialogVisible" title="警告:删除学生后无法恢复信息" width="30%">
-    <span
-      >确定删除学生<b>{{ form.name }}</b
-      >,账号:<span style="color: red">{{ id }}</span></span
-    >
+    <p>
+      确定删除学生<b>{{ form.name }}</b
+      >,账号:<span style="color: red">{{ id }}</span>
+    </p>
+    <p>删除学生的同时会同步删除请假记录</p>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">关闭</el-button>
@@ -100,15 +107,16 @@ function update() {
   formData.append("name", form.name);
   formData.append("sex", form.sex);
   formData.append("time", form.time);
+  formData.append("college", form.college);
+  formData.append("major", form.major);
   formData.append("_class", form.class);
+  formData.append("id_number", form.id_number);
+  formData.append("address", form.address);
   if (document.getElementById("image").files[0]) {
     formData.append("image", document.getElementById("image").files[0]);
   }
-  if (!form.name) {
-    ElMessage.warning("请填写学生姓名");
-    return false;
-  }
-  axios.put(`/teacher/${id}`, formData).then(res => {
+
+  axios.put(`/student/${id}`, formData).then(res => {
     if (res.data.success) {
       ElMessage.success("添加成功");
       router.go(0);
@@ -119,10 +127,10 @@ function update() {
 }
 let dialogVisible = ref(false);
 function remove() {
-  axios.delete(`/teacher/${id}`).then(res => {
+  axios.delete(`/student/${id}`).then(res => {
     if (res.data.success) {
       ElMessage.success("删除成功");
-      router.replace("/teacher");
+      router.replace("/student");
     } else {
       ElMessage.error("删除失败");
     }
@@ -132,8 +140,8 @@ function remove() {
 <style scoped lang="scss">
 .el-form {
   margin-top: 30px;
-  .el-input{
-      width: 500px;
+  .el-input {
+    width: 500px;
   }
 }
 .avatar-uploader {

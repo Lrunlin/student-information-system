@@ -40,7 +40,6 @@
         v-model:class="form.class"
       />
     </el-form-item>
-
     <el-form-item>
       <el-button type="primary" @click="create">创建</el-button>
     </el-form-item>
