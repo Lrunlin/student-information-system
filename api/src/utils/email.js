@@ -1,5 +1,11 @@
 const nodemailer = require('nodemailer')
 
+
+/** 
+ * @params title {string} 标题
+ * @params content {string} 内容HTML字符串
+ * @params users {string[]} 用户邮箱
+ */
 async function email(title, content, users) {
     let transporter = nodemailer.createTransport({
         service: "qq",

@@ -51,14 +51,9 @@ let rules = {
     },
     {
       min: 3,
-      max: 15,
-      message: "账号长度在3-15",
+      max: 30,
+      message: "账号长度在3-30",
       trigger: "blur",
-    },
-    {
-      validator: (rule, value) => /^[A-Za-z0-9]+$/.test(value),
-      message: "账号为数字或字母",
-      trigger: "change",
     },
   ],
   password: [

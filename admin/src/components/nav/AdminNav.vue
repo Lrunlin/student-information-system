@@ -6,6 +6,10 @@
     text-color="#fff"
     :router="true"
   >
+    <el-menu-item index="/">
+      <el-icon><HomeFilled /></el-icon>
+      首页公告
+    </el-menu-item>
     <el-sub-menu index="1">
       <template #title>
         <el-icon><avatar /></el-icon>
@@ -34,6 +38,6 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import { UserFilled, Message, Edit,Avatar } from "@element-plus/icons-vue";
+import { UserFilled, Message, Edit, Avatar, HomeFilled } from "@element-plus/icons-vue";
 </script>
 <style scoped lang="scss"></style>

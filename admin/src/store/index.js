@@ -10,8 +10,8 @@ export default createStore({
   mutations: {
     // 设置用户状态和用户身份
     setUserData(state, value) {
-      state.data = value.data
-      state.identity = value.identity
+      state.data = value.data;
+      state.identity = value.identity;
     }
   },
   actions: {},

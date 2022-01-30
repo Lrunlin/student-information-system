@@ -2,6 +2,7 @@
   <el-skeleton :rows="15" v-if="isLoad" />
   <component :is="NavComponent" />
   <router-view></router-view>
+   <el-backtop />
 </template>
 <script setup>
 import { ref, onUnmounted, computed } from "vue";

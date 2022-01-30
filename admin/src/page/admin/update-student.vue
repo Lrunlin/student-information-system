@@ -42,7 +42,11 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="update">修改</el-button>
-      <el-button style="margin-left: 20px" type="danger" @click="dialogVisible = true"
+      <el-button
+        style="margin-left: 20px"
+        type="danger"
+        v-if="store.state.identity == 'admin'"
+        @click="dialogVisible = true"
         >删除学生</el-button
       >
     </el-form-item>
@@ -70,8 +74,12 @@ import axios from "axios";
 import LinkageSelect from "@/components/select/LinkageSelect.vue";
 import { ElMessage } from "element-plus";
 import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex";
+
+let store = useStore();
 let route = useRoute();
 let router = useRouter();
+
 const URL = axios.defaults.baseURL;
 let id = route.params.id;
 

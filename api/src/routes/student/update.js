@@ -5,10 +5,14 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 const moment = require('moment');
-const admin = require('@/utils/admin');
+const auth = require('@/utils/auth');
 
 
-router.put('/student/:id', admin, async (req, res) => {
+router.put('/student/:id', auth, async (req, res) => {
+    if (req.authentication == 'student') {
+        res.status(401);
+        return false;
+    };
     let {
         name,
         sex,
