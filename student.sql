@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2022-01-25 16:13:07
+-- 生成日期： 2022-01-31 01:25:03
 -- 服务器版本： 5.7.26
 -- PHP 版本： 7.2.18
 
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` varchar(100) NOT NULL COMMENT '管理员账号',
-  `password` varchar(100) NOT NULL COMMENT '管理员密码'
+  `password` varchar(100) NOT NULL COMMENT '管理员密码',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -39,7 +40,30 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `password`) VALUES
-('admin', '1');
+('admin', '123');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `notice`
+--
+
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE IF NOT EXISTS `notice` (
+  `id` varchar(80) NOT NULL COMMENT 'ID',
+  `title` text NOT NULL COMMENT '邮件标题',
+  `content` text NOT NULL COMMENT '邮件HTML内容',
+  `target` varchar(20) NOT NULL COMMENT '邮件接收目标（teacher，student）',
+  `time` datetime NOT NULL COMMENT '发送时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `notice`
+--
+
+INSERT INTO `notice` (`id`, `title`, `content`, `target`, `time`) VALUES
+('fde32d64b29f69eba9d0d42e4ea47dd2', '演示视频测试', '<h1 id=\"演示视频测试内容\">演示视频测试内容</h1>\n', 'student', '2022-01-30 14:56:22');
 
 -- --------------------------------------------------------
 
@@ -57,12 +81,19 @@ CREATE TABLE IF NOT EXISTS `student` (
   `major` varchar(30) NOT NULL COMMENT '所学专业',
   `class` varchar(30) NOT NULL COMMENT '学生班级',
   `time` date NOT NULL COMMENT '入学时间',
-  `user_id` varchar(30) NOT NULL COMMENT '身份证号',
   `id_number` varchar(30) NOT NULL COMMENT '身份证号',
-  `email` varchar(60) NOT NULL COMMENT '绑定邮箱',
+  `email` varchar(60) DEFAULT NULL COMMENT '绑定邮箱',
   `address` varchar(600) NOT NULL COMMENT '家庭住址',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `student`
+--
+
+INSERT INTO `student` (`id`, `password`, `name`, `sex`, `college`, `major`, `class`, `time`, `id_number`, `email`, `address`) VALUES
+('32423401', '2', '32423412', '女', '高等职业技术学院', '软件技术', '电子商务4班', '2022-01-27', '234234', '1974109227@qq.com', '234324'),
+('12301', '12301', '123', '男', '高等职业技术学院', '计算机应用技术', '计算机应用技术3班', '2022-01-27', '123123', NULL, '123213');
 
 -- --------------------------------------------------------
 
@@ -87,8 +118,37 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `password`, `name`, `sex`, `class`, `time`, `email`) VALUES
-('dingguangyu01', 'dingguangyu01', '丁光禹', '女', NULL, '2022-01-25', NULL),
-('liurunlin01', 'liurunlin01', '刘润霖', '男', '电子商务1班,计算机应用技术3班', '2022-01-25', '1974109227@qq.com');
+('teacher_yanshishipin01', 'teacher_yanshishipin01', '演示视频', '男', '机器人工程1班', '2022-01-30', NULL),
+('teacher_yanshishipin02', 'teacher_yanshishipin02', '演示视频', '女', '电子商务1班,电子商务2班,电子商务3班,电子商务4班', '2022-01-20', '1974109227@qq.com'),
+('teacher_zhanglaoshi01', 'teacher_zhanglaoshi01', '张老师', '男', '电子商务4班', '2022-01-26', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `vacation`
+--
+
+DROP TABLE IF EXISTS `vacation`;
+CREATE TABLE IF NOT EXISTS `vacation` (
+  `id` varchar(80) NOT NULL COMMENT '请假的ID',
+  `student` varchar(80) NOT NULL COMMENT '学生的ID',
+  `start_time` datetime NOT NULL COMMENT '起始时间',
+  `end_time` datetime NOT NULL COMMENT '结束时间',
+  `state` int(11) NOT NULL COMMENT '状态(1通过0没过2待批注)',
+  `reason` text NOT NULL COMMENT '请假原因',
+  `notes` text COMMENT '导员批注',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `vacation`
+--
+
+INSERT INTO `vacation` (`id`, `student`, `start_time`, `end_time`, `state`, `reason`, `notes`) VALUES
+('42872e7671e7acbf1409332575096d88', '32423401', '2022-01-31 00:00:00', '2022-01-31 00:00:00', 1, '啊实打实大师的', '早点回来'),
+('4ed2893915d333ce402b1b1d6c0f45ff', '32423401', '2022-01-31 00:00:00', '2022-02-01 00:00:00', 1, '测试演示视频', '12312312'),
+('20954b662911558b232f13f1c34212f0', '32423401', '2022-01-29 00:00:00', '2022-01-29 00:00:00', 2, 'sad', NULL),
+('e793fe321c615357fe366aad6a81ecf8', '32423401', '2022-01-30 00:00:00', '2022-02-01 00:00:00', 2, '萨达萨达', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
