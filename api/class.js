@@ -1,6 +1,7 @@
 const md5 = require('md5');
 const fs = require('fs');
 
+//生成Class数据
 
 
 let college = ['高等职业技术学院', '计算机与软件学院', '智能电子学院'];
@@ -9,6 +10,7 @@ let major = [
     ['计算机科学与技术', '软件工程', ],
     ['智能科学与技术', '电子信息与工程', '机器人工程']
 ];
+
 
 function createClass(string) {
     return [...Array(4)].map((item, index) => `${string}${index+1}班`)

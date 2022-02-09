@@ -53,6 +53,11 @@
         <el-button type="primary" @click="link(scope.row.id)">编辑</el-button>
       </template>
     </el-table-column>
+    <el-table-column label="档案">
+      <template v-slot="scope">
+        <el-button type="primary" @click="linkArchives(scope.row.id)">档案</el-button>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 <script setup>
@@ -84,7 +89,7 @@ watch(
   }),
   () => {
     tableData.value = data.value.filter(item => {
-      return (item[key.value] == value.value);
+      return item[key.value] == value.value;
     });
   }
 );
@@ -92,6 +97,9 @@ watch(
 let router = useRouter();
 function link(id) {
   router.push(`/student/${id}`);
+}
+function linkArchives(id) {
+  router.push(`/archives/${id}`);
 }
 </script>
 <style scoped lang="scss">

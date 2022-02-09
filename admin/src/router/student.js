@@ -7,5 +7,8 @@ const student = [{
 }, {
     path: '/student-set',
     component: () => import('@/page/studnet/student-set.vue')
+}, {
+    path: '/archives/:id',
+    component: () => import('@/page/teacher/archives/index.vue')
 }]
 export default student;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2022-01-31 01:25:03
+-- 生成日期： 2022-02-09 10:25:21
 -- 服务器版本： 5.7.26
 -- PHP 版本： 7.2.18
 
@@ -45,6 +45,32 @@ INSERT INTO `admin` (`id`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `archives`
+--
+
+DROP TABLE IF EXISTS `archives`;
+CREATE TABLE IF NOT EXISTS `archives` (
+  `id` varchar(80) NOT NULL COMMENT '档案ID',
+  `student` varchar(80) NOT NULL COMMENT '对应的学生ID',
+  `teacher` varchar(80) NOT NULL COMMENT '对应的教师ID',
+  `title` text NOT NULL COMMENT '档案标题',
+  `content` text NOT NULL COMMENT '档案信息内容',
+  `time` datetime NOT NULL COMMENT '档案时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `archives`
+--
+
+INSERT INTO `archives` (`id`, `student`, `teacher`, `title`, `content`, `time`) VALUES
+('e424d8deb24d6d1ecdfac2f669639595', '32423401', 'teacher_yanshishipin02', '森岛帆高', '森岛帆高', '2022-02-09 05:08:36'),
+('5f5742ec4688efa2bb65cabe4742d0b1', '32423401', 'teacher_yanshishipin02', '版本', '版本', '2022-02-01 05:24:19'),
+('f89e5495388087a052bb1178d1aef803', '32423401', 'teacher_yanshishipin02', '对方过后', '对方过后的规范化', '2022-02-09 05:41:35');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `notice`
 --
 
@@ -73,7 +99,7 @@ INSERT INTO `notice` (`id`, `title`, `content`, `target`, `time`) VALUES
 
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
-  `id` varchar(30) NOT NULL COMMENT '学生ID',
+  `id` varchar(308) NOT NULL COMMENT '学生ID',
   `password` varchar(100) NOT NULL COMMENT '登录密码',
   `name` varchar(50) NOT NULL COMMENT '学生姓名',
   `sex` varchar(5) NOT NULL COMMENT '性别',
@@ -103,7 +129,7 @@ INSERT INTO `student` (`id`, `password`, `name`, `sex`, `college`, `major`, `cla
 
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE IF NOT EXISTS `teacher` (
-  `id` varchar(30) NOT NULL COMMENT '指导教师ID',
+  `id` varchar(80) NOT NULL COMMENT '指导教师ID',
   `password` varchar(100) NOT NULL COMMENT '登录密码',
   `name` varchar(50) NOT NULL COMMENT '指导教师姓名',
   `sex` varchar(5) NOT NULL COMMENT '性别',
