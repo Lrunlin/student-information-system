@@ -2,7 +2,7 @@
   <div class="login">
     <div class="top">
       <div class="header">
-        <div class="title">学生档案</div>
+        <div class="title">档案信息系统</div>
       </div>
     </div>
     <div class="main">

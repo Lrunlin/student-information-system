@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2022-02-17 05:18:11
+-- 生成日期： 2022-03-07 08:45:12
 -- 服务器版本： 5.7.26
 -- PHP 版本： 7.2.18
 
@@ -99,7 +99,7 @@ INSERT INTO `notice` (`id`, `title`, `content`, `target`, `time`) VALUES
 
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
-  `id` varchar(308) NOT NULL COMMENT '学生ID',
+  `id` varchar(300) NOT NULL COMMENT '学生ID',
   `password` varchar(100) NOT NULL COMMENT '登录密码',
   `name` varchar(50) NOT NULL COMMENT '学生姓名',
   `sex` varchar(5) NOT NULL COMMENT '性别',
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `time` date NOT NULL COMMENT '入学时间',
   `id_number` varchar(30) NOT NULL COMMENT '身份证号',
   `email` varchar(60) DEFAULT NULL COMMENT '绑定邮箱',
-  `address` varchar(600) NOT NULL COMMENT '家庭住址',
+  `address` text NOT NULL COMMENT '家庭住址',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 --
 
 INSERT INTO `student` (`id`, `password`, `name`, `sex`, `college`, `major`, `class`, `time`, `id_number`, `email`, `address`) VALUES
-('32423401', '2', '32423412', '女', '高等职业技术学院', '软件技术', '电子商务4班', '2022-01-27', '234234', '1974109227@qq.com', '234324'),
+('32423401', '2', '学生测试', '女', '高等职业技术学院', '软件技术', '电子商务4班', '2022-01-27', '43289473289478932', '1974109227@qq.com', '大连东软信息学院'),
 ('12301', '12301', '123', '男', '高等职业技术学院', '计算机应用技术', '计算机应用技术3班', '2022-01-27', '123123', NULL, '123213');
 
 -- --------------------------------------------------------

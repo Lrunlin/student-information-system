@@ -111,6 +111,11 @@ function changeImage() {
   imageSrc.value = url;
 }
 function update() {
+  if (Object.values(form).some(item => !/^[\s\S]*.*[^\s][\s\S]*$/.test(item))) {
+    ElMessage.warning("请将学生信息填写完整");
+    return false;
+  }
+
   let formData = new FormData();
   formData.append("name", form.name);
   formData.append("sex", form.sex);
