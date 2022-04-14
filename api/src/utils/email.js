@@ -16,8 +16,6 @@ async function email(title, content, users) {
             pass: "mcnntrlfnjkjcaae",
         },
     });
-
-
     let mailOptions = {
         from: "353575900@qq.com",
         to: users,

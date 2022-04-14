@@ -14,15 +14,12 @@ router.post('/reason', auth, async (req, res) => {
     } = req.body;
 
     let id = md5(req.id + JSON.stringify(req.body)); //防止重复
-
     let sql = `INSERT INTO vacation ( id, student,start_time,end_time,state,reason)
                        VALUES
              ('${id}','${req.id}','${moment(new Date(start_time)).format('YYYY-MM-DD')}','${moment(new Date(end_time)).format('YYYY-MM-DD')}',2,'${reason}');`
-
     try {
         let [row] = await db.query(sql);
         let isSuccess = !!row.affectedRows;
-
         if (!isSuccess) {
             res.json({
                 success: false,
@@ -30,7 +27,6 @@ router.post('/reason', auth, async (req, res) => {
             });
             return false;
         }
-
         res.json({
             success: true,
             message: '创建成功'
@@ -41,6 +37,5 @@ router.post('/reason', auth, async (req, res) => {
             message: '创建失败'
         })
     }
-
 });
 module.exports = router;
