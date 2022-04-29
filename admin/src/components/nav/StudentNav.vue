@@ -22,11 +22,13 @@
       <el-icon><Setting /></el-icon>
       信息修改
     </el-menu-item>
+    <SignOut/>
   </el-menu>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { Avatar, Setting,HomeFilled } from "@element-plus/icons-vue";
+import SignOut from "./SignOut.vue";
 </script>
 <style scoped lang="scss"></style>

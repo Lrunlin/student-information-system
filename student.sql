@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1:3306
--- 生成日期： 2022-03-07 08:45:12
+-- 生成日期： 2022-04-29 04:20:40
 -- 服务器版本： 5.7.26
 -- PHP 版本： 7.2.18
 
@@ -89,7 +89,9 @@ CREATE TABLE IF NOT EXISTS `notice` (
 --
 
 INSERT INTO `notice` (`id`, `title`, `content`, `target`, `time`) VALUES
-('fde32d64b29f69eba9d0d42e4ea47dd2', '演示视频测试', '<h1 id=\"演示视频测试内容\">演示视频测试内容</h1>\n', 'student', '2022-01-30 14:56:22');
+('fde32d64b29f69eba9d0d42e4ea47dd2', '演示视频测试', '<h1 id=\"演示视频测试内容\">演示视频测试内容</h1>\n', 'student', '2022-01-30 14:56:22'),
+('95d70f38cf17f35753f6dcf045510c75', '测试邮件群发', '<blockquote>\n<p>以下是主体内容</p>\n</blockquote>\n<p>演示公告群发功能</p>\n', 'teacher', '2022-03-23 17:58:35'),
+('130963671023837aedc73ede5ab4ce6f', '公告群发', '<blockquote>\n<p>对全体教师进行邮箱群发</p>\n</blockquote>\n<p><em>论文提供截图</em></p>\n', 'teacher', '2022-03-23 18:22:22');
 
 -- --------------------------------------------------------
 
@@ -146,7 +148,8 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 INSERT INTO `teacher` (`id`, `password`, `name`, `sex`, `class`, `time`, `email`) VALUES
 ('teacher_yanshishipin01', 'teacher_yanshishipin01', '演示视频', '男', '机器人工程1班', '2022-01-30', NULL),
 ('teacher_yanshishipin02', 'teacher_yanshishipin02', '演示视频', '女', '电子商务1班,电子商务2班,电子商务3班,电子商务4班', '2022-01-20', '1974109227@qq.com'),
-('teacher_zhanglaoshi01', 'teacher_zhanglaoshi01', '张老师', '男', '电子商务4班', '2022-01-26', NULL);
+('teacher_zhanglaoshi01', 'teacher_zhanglaoshi01', '张老师', '男', '电子商务4班', '2022-01-26', NULL),
+('teacher_zhanshi01', 'teacher_zhanshi01', '展示1', '女', NULL, '2022-03-18', NULL);
 
 -- --------------------------------------------------------
 
@@ -172,9 +175,10 @@ CREATE TABLE IF NOT EXISTS `vacation` (
 
 INSERT INTO `vacation` (`id`, `student`, `start_time`, `end_time`, `state`, `reason`, `notes`) VALUES
 ('42872e7671e7acbf1409332575096d88', '32423401', '2022-01-31 00:00:00', '2022-01-31 00:00:00', 1, '啊实打实大师的', '早点回来'),
-('4ed2893915d333ce402b1b1d6c0f45ff', '32423401', '2022-01-31 00:00:00', '2022-02-01 00:00:00', 1, '测试演示视频', '12312312'),
+('4ed2893915d333ce402b1b1d6c0f45ff', '32423401', '2022-01-31 00:00:00', '2022-02-01 00:00:00', 2, '测试演示视频', '12312312'),
 ('20954b662911558b232f13f1c34212f0', '32423401', '2022-01-29 00:00:00', '2022-01-29 00:00:00', 2, 'sad', NULL),
-('e793fe321c615357fe366aad6a81ecf8', '32423401', '2022-01-30 00:00:00', '2022-02-01 00:00:00', 2, '萨达萨达', NULL);
+('e793fe321c615357fe366aad6a81ecf8', '32423401', '2022-01-30 00:00:00', '2022-02-01 00:00:00', 2, '萨达萨达', NULL),
+('48d3e00e40d012f8ccffca9a8d141418', '32423401', '2022-03-18 00:00:00', '2022-03-23 00:00:00', 2, 'sadsad', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
