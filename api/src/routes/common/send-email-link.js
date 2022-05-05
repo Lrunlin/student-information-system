@@ -14,7 +14,15 @@ router.put('/email/:email', auth, async (req, res) => {
       <div>身份:${req.authentication}</div>
       <div>账号:${req.id}</div>
       <h3 style="color:red;">如果不是您在系统中发送的验证链接请不要点击并且忽略这条邮件</h3>
-      <a style="font-weight:700;font-size:24px;" href=http://localhost:3000/email?key=${key}>验证链接(有效时间1小时)</a>
+      <div>
+        <a style="font-weight:700;font-size:24px;" href=http://localhost:3000/email?key=${key}>验证链接(有效时间1小时)</a>
+      </div>
+      <div>
+       如果链接无法点击请复制以下链接在浏览器打开
+       <pre>
+         http://localhost:3000/email?key=${key}
+       </pre>
+      </div>
     `;
     let result = await email(`激活邮箱`, content, user_email)
     res.json(result);
