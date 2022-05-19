@@ -8,15 +8,13 @@ const auth = require('@/utils/auth');
 
 router.post('/reason', auth, async (req, res) => {
     let {
-        start_time,
-        end_time,
-        reason
+        content,
     } = req.body;
 
     let id = md5(req.id + JSON.stringify(req.body)); //防止重复
-    let sql = `INSERT INTO vacation ( id, student,start_time,end_time,state,reason)
+    let sql = `INSERT INTO vacation ( id, student,state,reason,time)
                        VALUES
-             ('${id}','${req.id}','${moment(new Date(start_time)).format('YYYY-MM-DD')}','${moment(new Date(end_time)).format('YYYY-MM-DD')}',2,'${reason}');`
+             ('${id}','${req.id}',0,'${content}','${moment(new Date()).format('YYYY-MM-DD hh:mm:ss')}');`
     try {
         let [row] = await db.query(sql);
         let isSuccess = !!row.affectedRows;

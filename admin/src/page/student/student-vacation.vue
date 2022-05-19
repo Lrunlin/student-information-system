@@ -1,20 +1,10 @@
 <template>
   <el-table :data="tableData" style="width: 100%">
-    <el-table-column label="起始时间" width="230">
+    <el-table-column label="时间" width="230">
       <template v-slot="scope">
         <el-date-picker
           style="width: 200px"
-          v-model="scope.row.start_time"
-          type="datetime"
-          :readonly="true"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column label="结束时间" width="230">
-      <template v-slot="scope">
-        <el-date-picker
-          style="width: 200px"
-          v-model="scope.row.start_time"
+          v-model="scope.row.time"
           type="datetime"
           :readonly="true"
         />
@@ -22,28 +12,21 @@
     </el-table-column>
     <el-table-column label="假条状态" width="80">
       <template v-slot="scope">
-        <el-tag v-if="scope.row.state == '2'">未处理</el-tag>
-        <el-tag v-if="scope.row.state == '1'" type="success">已批准</el-tag>
-        <el-tag v-if="scope.row.state == '0'" type="danger">未通过</el-tag>
+        <el-tag v-if="scope.row.state == '1'" type="success">已处理</el-tag>
+        <el-tag v-if="scope.row.state == '0'" type="danger">未处理</el-tag>
       </template>
     </el-table-column>
-    <el-table-column label="请假原因" width="80">
+    <el-table-column label="问题反馈" width="180">
       <template v-slot="scope">
-        <el-button type="primary" size="small" @click="open('请假原因', scope.row.reason)"
-          >查看</el-button
-        >
+        <div @click="open('问题反馈', scope.row.reason)" class="ovh">{{ scope.row.reason }}</div>
       </template>
     </el-table-column>
     <el-table-column label="教师反馈" width="180">
       <template v-slot="scope">
-        <el-button
-          type="primary"
-          v-if="scope.row.notes"
-          size="small"
-          @click="open('教师反馈', scope.row.notes)"
-        >
-          查看
-        </el-button>
+        <div v-if="scope.row.notes" @click="open('问题反馈', scope.row.notes)" class="ovh">
+          {{ scope.row.notes }}
+        </div>
+
         <el-tag v-else>暂未回复</el-tag>
       </template>
     </el-table-column>
@@ -84,4 +67,11 @@ function remove(id, index) {
   });
 }
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.ovh {
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+</style>

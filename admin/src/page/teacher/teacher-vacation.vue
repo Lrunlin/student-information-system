@@ -1,19 +1,10 @@
 <template>
   <el-table :data="tableData" style="width: 100%">
     <el-table-column prop="student" label="学生" width="180" />
-    <el-table-column label="起始时间" width="180">
+
+    <el-table-column label="内容" width="80">
       <template v-slot="scope">
-        <el-date-picker v-model="scope.row.start_time" type="datetime" :readonly="true" />
-      </template>
-    </el-table-column>
-    <el-table-column label="截止时间" width="180">
-      <template v-slot="scope">
-        <el-date-picker v-model="scope.row.end_time" type="datetime" :readonly="true" />
-      </template>
-    </el-table-column>
-    <el-table-column label="说明" width="80">
-      <template v-slot="scope">
-        <el-popover title="请假说明" :width="200" trigger="hover" :content="scope.row.reason">
+        <el-popover title="内容" :width="200" trigger="hover" :content="scope.row.reason">
           <template #reference>
             <span>查看</span>
           </template>
@@ -21,11 +12,10 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="假条状态" width="100">
+    <el-table-column label="状态" width="100">
       <template v-slot="scope">
-        <el-tag v-if="scope.row.state == '2'">未处理</el-tag>
-        <el-tag v-if="scope.row.state == '1'" type="success">已批准</el-tag>
-        <el-tag v-if="scope.row.state == '0'" type="danger">未通过</el-tag>
+        <el-tag v-if="scope.row.state == '1'" type="success">结束</el-tag>
+        <el-tag v-if="scope.row.state == '0'" type="danger">正在进行</el-tag>
       </template>
     </el-table-column>
 
@@ -36,12 +26,11 @@
     </el-table-column>
   </el-table>
 
-  <el-dialog v-model="activeData" title="请假信息处理" width="30%">
+  <el-dialog v-model="activeData" title="回复" width="30%">
     <div>
       <el-select v-model="activeData.state">
-        <el-option label="不通过" :value="0"> </el-option>
-        <el-option label="通过" :value="1"> </el-option>
-        <el-option label="待审批" :value="2"> </el-option>
+        <el-option label="正在进行" :value="0"> </el-option>
+        <el-option label="结束" :value="1"> </el-option>
       </el-select>
       <el-input v-model="activeData.notes" :rows="2" type="textarea" placeholder="填写回复内容" />
     </div>
