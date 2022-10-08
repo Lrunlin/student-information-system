@@ -12,12 +12,12 @@ async function email(title, content, users) {
         port: 587,
         secure: false,
         auth: {
-            user: "353575900@qq.com",
-            pass: "mcnntrlfnjkjcaae",
+            user: "",
+            pass: "",
         },
     });
     let mailOptions = {
-        from: "353575900@qq.com",
+        from: "",
         to: users,
         subject: title,
         html: content,

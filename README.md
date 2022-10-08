@@ -35,6 +35,8 @@
 
 ## 启动
 
+设置 QQ 邮箱发送配置  
+
 1. npm i yarn -g（如果已经有 yarn 请忽略）
 2. 点击 install.bat
 3. 点击 dev.bat
